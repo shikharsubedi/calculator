@@ -1,2 +1,2 @@
 # calculator
-Calculator in plain javascript, html and css
+MacOS calculator in plain javascript, html and css
