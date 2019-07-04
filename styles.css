@@ -9,10 +9,12 @@
     align-items:center;
     width:400px;
     text-align:center;
-    min-height: 600px;  
+    min-height: 60vmin;  
     font-size:35px;
     font-family:Arial, Helvetica, sans-serif;  
+    box-shadow: -5px 4px 23px -8px rgba(0,0,0,0.75);
 }
+
 .row {
     display: flex;
     flex-direction: row;
@@ -61,4 +63,7 @@
     font-family:'Courier New', Courier, monospace;
 }
 
+.last {
+    border-bottom: none;
+}
 
