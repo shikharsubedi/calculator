@@ -42,6 +42,22 @@
     text-align: center;
     width:25%;  
 }
+.left-button:hover {
+    background-color: #ebebeb;
+}
+.left-button:active {
+    background-color: #bbbcbe;
+}
+
+.right-button:hover {
+    background-color: #dfb07e;
+  }
+  
+.right-button:active {
+    background-color: #dd8d37;
+  }
+  
+  
 
 .cancel {
     width:50%;
