@@ -56,15 +56,10 @@
 .right-button:active {
     background-color: #dd8d37;
   }
-  
-  
+.triple {
+    width: 75%;
+}
 
-.cancel {
-    width:50%;
-}
-.zero {
-    width:75%;
-}
 .display {
     height:75px;
     display:flex;

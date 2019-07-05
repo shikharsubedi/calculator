@@ -67,6 +67,24 @@ function handleClick (value) {
     return processEqualSign(value)
   }
 }
+
+/**
+ * This method handles when a button is pressed
+ * @param {String} value the value of the button pressed
+ * @returns {Number}
+ */
+function processNumber (value) {
+  if (isEqualSign(prevValue)) {
+    reset()
+  }
+  if (isOperation(prevValue)) {
+    numericArray = []
+  }
+  numericArray.push(value)
+  prevValue = value
+  return numericArray.join('')
+}
+
 /**
  * The method processes the '=' (equals) button
  * @param {String} value The value of the button that is pressed
@@ -81,11 +99,44 @@ function processEqualSign (value) {
     numericArray = []
     return result
   }
+
+  if (isOperation(prevValue)) {
+    prevValue = value
+    result = executeOperation(prevOperation, operand, operand)
+    return result
+  }
   prevValue = value
   result = executeOperation(prevOperation, result, operand)
-  numericArray = []
   return result
 }
+
+/**
+ * This method handles the arithmetic operators
+ * @param {String} operator The value of the button pressed
+ * @returns {Number}
+ */
+function processOperation (operator) {
+  let operandString = numericArray.join('') || '0'
+  let operand = Number(operandString)
+
+  if (isEqualSign(prevValue) || isOperation(prevValue)) {
+    prevOperation = operator
+    prevValue = operator
+    return result
+  }
+
+  if (!prevOperation) {
+    prevValue = operator
+    prevOperation = operator
+    result = operand
+    return result
+  }
+  prevValue = operator
+  result = executeOperation(prevOperation, result, operand)
+  prevOperation = operator
+  return result
+}
+
 /**
  * This method handles the 'C' button
  *@returns {Number}
@@ -102,50 +153,6 @@ function reset () {
   prevOperation = undefined
   numericArray = []
   result = 0
-}
-/**
- * This method handles when a button is pressed
- * @param {String} value the value of the button pressed
- * @returns {Number}
- */
-function processNumber (value) {
-  if (isEqualSign(prevValue)) {
-    reset()
-  }
-  numericArray.push(value)
-  prevValue = value
-  return numericArray.join('')
-}
-
-/**
- * This method handles the arithmetic operators
- * @param {String} operator The value of the button pressed
- * @returns {Number}
- */
-function processOperation (operator) {
-  let operandString = numericArray.join('') || '0'
-  let operand = Number(operandString)
-  numericArray = []
-
-  if (isEqualSign(prevValue)) {
-    prevOperation = operator
-    prevValue = operator
-    return result
-  }
-  if (isOperation(prevValue)) {
-    prevOperation = operator
-    return result
-  }
-  if (!prevOperation) {
-    prevValue = operator
-    prevOperation = operator
-    result = operand
-    return result
-  }
-  prevValue = operator
-  result = executeOperation(prevOperation, result, operand)
-  prevOperation = operator
-  return result
 }
 
 /**
